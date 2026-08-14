@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OPS Arena - Player Profile</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #080b12;
+  color: white;
+  min-height: 100vh;
+}
+
+.header {
+  padding: 25px 20px;
+  background: linear-gradient(135deg, #101827, #080b12);
+  border-bottom: 1px solid #252c38;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.logo span {
+  color: #f5c542;
+}
+
+.subtitle {
+  margin-top: 8px;
+  color: #9da7b8;
+}
+
+.container {
+  padding: 25px 20px 100px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.card {
+  background: #111827;
+  border: 1px solid #2b3546;
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #f5c542;
+  color: #080b12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  margin: 0 auto 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.status {
+  text-align: center;
+  color: #f5c542;
+  margin-bottom: 25px;
+}
+
+label {
+  display: block;
+  margin: 15px 0 7px;
+  color: #c7ceda;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #354052;
+  background: #080b12;
+  color: white;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 12px;
+  background: #f5c542;
+  color: #080b12;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.back {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  color: #f5c542;
+  text-decoration: none;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.stat {
+  background: #080b12;
+  padding: 15px 5px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stat strong {
+  display: block;
+  font-size: 22px;
+  color: #f5c542;
+}
+
+.stat small {
+  color: #9da7b8;
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="logo">OPS <span>ARENA</span></div>
+  <div class="subtitle">Official Competition Platform</div>
+</header>
+
+<main class="container">
+
+  <div class="card">
+
+    <div class="avatar">👤</div>
+
+    <h1 id="playerName">Create Your Profile</h1>
+    <div class="status">OPS Arena Player</div>
+
+    <label>Display Name</label>
+    <input id="name" type="text" placeholder="Enter your name">
+
+    <label>Player ID</label>
+    <input id="playerId" type="text" placeholder="Example: OPS001">
+
+    <label>Team</label>
+    <input id="team" type="text" placeholder="Enter your team">
+
+    <label>Country</label>
+    <input id="country" type="text" placeholder="Enter your country">
+
+    <button onclick="saveProfile()">Save Profile</button>
+
+    <a class="back" href="index.html">← Back to OPS Arena</a>
+
+  </div>
+
+  <div class="card">
+
+    <h2>Player Statistics</h2>
+
+    <div class="stats">
+      <div class="stat">
+        <strong>0</strong>
+        <small>Matches</small>
+      </div>
+
+      <div class="stat">
+        <strong>0</strong>
+        <small>Wins</small>
+      </div>
+
+      <div class="stat">
+        <strong>0</strong>
+        <small>Trophies</small>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<script>
+function saveProfile() {
+  const profile = {
+    name: document.getElementById("name").value,
+    playerId: document.getElementById("playerId").value,
+    team: document.getElementById("team").value,
+    country: document.getElementById("country").value
+  };
+
+  localStorage.setItem("opsArenaProfile", JSON.stringify(profile));
+
+  document.getElementById("playerName").textContent =
+    profile.name || "OPS Arena Player";
+
+  alert("Profile saved successfully!");
+}
+
+window.onload = function() {
+  const saved = localStorage.getItem("opsArenaProfile");
+
+  if (saved) {
+    const profile = JSON.parse(saved);
+
+    document.getElementById("name").value = profile.name || "";
+    document.getElementById("playerId").value = profile.playerId || "";
+    document.getElementById("team").value = profile.team || "";
+    document.getElementById("country").value = profile.country || "";
+
+    document.getElementById("playerName").textContent =
+      profile.name || "OPS Arena Player";
+  }
+};
+</script>
+
+</body>
+</html>
